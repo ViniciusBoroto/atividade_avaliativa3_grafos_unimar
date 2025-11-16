@@ -238,6 +238,21 @@ class Grafo:
         for i in self.matriz:
             print(self.vertices[self.matriz.index(i)] +" " + " ".join([str(x) for x in i]))
 
+    def bfs(self) -> List[str]:
+        visitados = []
+        if len(self.vertices) == 0: return []
+        fila = [self.vertices[0]]
+        while len(fila) > 0:
+            v =fila.pop(0)
+            visitados.append(v)
+            vizinhos = self.vizinhos(v).sort()
+            for vizinho in vizinhos:
+                if vizinho in fila or vizinho in visitados:
+                    continue
+                fila.append(vizinho)
+        return visitados
+
+
 def main():
 
     pass
