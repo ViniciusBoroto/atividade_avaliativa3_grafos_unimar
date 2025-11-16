@@ -251,6 +251,33 @@ class Grafo:
                     continue
                 fila.append(vizinho)
         return visitados
+    
+    def menor_caminho(self, origem, fim) -> List[str]:
+        visitados = []
+        if len(self.vertices) == 0: return []
+        fila = [{
+            'vertice': origem,
+            'caminho': [],
+        }]
+        while fila:
+            v =fila.pop(0)
+            vertice = v['vertice']
+            caminho = v['caminho']
+            if vertice == fim:
+                return caminho
+            visitados.append(v)
+            vizinhos = self.vizinhos(vertice).sort()
+            for vizinho in vizinhos:
+                # se esta na fila
+                if vizinho in [i['vertice'] for i in fila]:
+                    continue
+                if vizinho in visitados:
+                    continue
+                fila.append({
+                    'vertice': vizinho,
+                    'caminho': caminho + [vizinho]
+                })
+        return []
 
 
 def main():
